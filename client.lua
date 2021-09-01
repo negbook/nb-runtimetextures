@@ -7,6 +7,9 @@ RegisterRuntimeTexture = function(txd,txn,width,height)
 	local temp_handle = CreateRuntimeTexture(temp_txd, txn, width, height)
 	if RuntimeTxd[txd] then error("Runtime Dict '"..txd.."' Exist",2) end 
 	local index = #RuntimeTextures + 1
+	if index >=125 then 
+		print("Warning: the runtime texture created is about limited")
+	end 
 	RuntimeTxd[txd] = true
 	table.insert(RuntimeTextures,{
 		txd = txd,
