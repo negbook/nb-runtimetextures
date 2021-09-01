@@ -7,5 +7,6 @@ author "negbook"
 
 client_script {
 
-  "client.lua"
+  "client.lua",
+  "example.lua"
 }
