@@ -29,12 +29,13 @@ DrawRuntimeTexture = function(index,x,y,w,h)
 		CreateThread(function()
 			DrawStart = true 
 			table.insert(RuntimeTexturesDraws,{RuntimeTextures[index].txd,RuntimeTextures[index].txn,x,y,w,h,index})
-			while true do 
+			while DrawStart do 
 				Wait(0)
 				for i=1,#RuntimeTexturesDraws do 
 					DrawSprite(RuntimeTexturesDraws[i][1], RuntimeTexturesDraws[i][2] , RuntimeTexturesDraws[i][3],RuntimeTexturesDraws[i][4],RuntimeTexturesDraws[i][5],RuntimeTexturesDraws[i][6]*GetAspectRatio(false), 0.0, 255, 255, 255, 255)
 				end 
 			end 
+			return print('All Drawing RuntimeTextures Canceled')
 		end)
 	end 
 end 
@@ -42,6 +43,9 @@ UnDrawRuntimeTexture = function(index)
 	for i=1,#RuntimeTexturesDraws do 
 		if RuntimeTexturesDraws[i] and RuntimeTexturesDraws[i][7] == index then 
 			table.remove(RuntimeTexturesDraws,i)
+			if #RuntimeTexturesDraws == 0 then 
+				DrawStart = false 
+			end 	
 			break
 		end 
 	end 
